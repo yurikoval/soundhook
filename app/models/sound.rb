@@ -3,4 +3,8 @@ class Sound < ApplicationRecord
   validates_presence_of :name, :sound_file
   has_attached_file :sound_file
   validates_attachment_content_type :sound_file, :content_type => /.*/
+
+  before_save do
+    self.hook_type ||= 'sound'
+  end
 end

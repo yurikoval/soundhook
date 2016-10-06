@@ -21,6 +21,11 @@
     <%= f.file_field :sound_file %>
   </div>
 
+  <div class="field">
+    <%= f.label :hook_type %>
+    <%= f.collection_select :hook_type, %w(sound youtube), :to_s, :capitalize %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
