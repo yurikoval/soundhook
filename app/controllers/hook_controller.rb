@@ -5,11 +5,11 @@ class HookController < ApplicationController
 
   def create
     if sound = Sound.find_by(name: params[:provider])
-      @data = "#{sound.hook_type.camelize}Formatter"
+      formatter = "#{sound.hook_type.camelize}Formatter"
         .safe_constantize
         .new(sound, params)
-        .data
-      render plain: "Soundhook received for #{params[:provider]}"
+      @data = formatter.data
+      render inline: formatter.response, format: formatter.format
     else
       head :not_found
     end

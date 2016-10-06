@@ -1,9 +1,4 @@
-class SoundFormatter
-  def initialize(sound, params = {})
-    @sound = sound
-    @params = params
-  end
-
+class SoundFormatter < BaseFormatter
   def data
     {
       sound_url: @sound.sound_file.url,

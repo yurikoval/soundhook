@@ -1,9 +1,4 @@
-class YoutubeFormatter
-  def initialize(sound, params = {})
-    @sound = sound
-    @params = params
-  end
-
+class YoutubeFormatter < BaseFormatter
   def data
     url = extract_youtube_id(@params[:text])
     {
