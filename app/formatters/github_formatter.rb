@@ -2,7 +2,7 @@ class GithubFormatter < BaseFormatter
   def data
     {
       type: 'git_master_modified',
-      repository: @params[:respository][:name],
+      repository: @params[:repository][:name],
       sender_name: @params[:sender][:login],
       sender_img: @params[:sender][:avatar_url],
       commits: @params[:commits],
