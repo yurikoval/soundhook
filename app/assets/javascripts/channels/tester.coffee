@@ -13,10 +13,19 @@ firstScriptTag.parentNode.insertBefore tag, firstScriptTag
 App.cable = ActionCable.createConsumer()
 
 App.messages = App.cable.subscriptions.create 'MessagesChannel',
+  done: true
   received: (data) ->
+    @stopEverything()
     switch data.type
-      when 'sound'    then @playSound(data)
-      when 'youtube'  then @playYoutube(data)
+      when 'sound'                    then @playSound(data)
+      when 'youtube'                  then @playYoutube(data)
+      # when 'message'                then @displayMessage(data)
+      # when 'sale'                   then @displaySale(data)
+      # when 'git_master_modified'    then @gitMasterModified(data)
+
+  stopEverything: ->
+    @stopVideo()
+    @stopSound()
 
   playSound: (data) ->
     src = $("#player")
@@ -24,6 +33,9 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     src.attr 'type', data.format
     src.trigger('load')
     src.trigger('play')
+  stopSound: ->
+    src = $("#player")
+    src.trigger('pause')
 
   playYoutube: (data) ->
     if @player?
@@ -42,15 +54,17 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
 
   onPlayerReady: (event) ->
     event.target.playVideo()
+    @done = false
     return
 
   onPlayerStateChange: (event) ->
-    if event.data == YT.PlayerState.PLAYING and !done
+    if event.data == YT.PlayerState.PLAYING and !@done
       setTimeout @stopVideo.bind(this), 30000
-      done = true
+      @done = true
     return
 
   stopVideo: ->
+    return true unless @player?
     @player.stopVideo()
     @player.destroy()
     @player = undefined
