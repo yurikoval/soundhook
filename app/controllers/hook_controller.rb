@@ -1,6 +1,7 @@
+require 'uri'
 class HookController < ApplicationController
   after_action :send_hook
-  skip_before_filter :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
   def create
     if sound = Sound.find_by(name: params[:provider])
       @data = {
@@ -14,10 +15,11 @@ class HookController < ApplicationController
   end
 
   def youtube
+    url = extract_youtube_id(params[:url])
     @data = {
       type: 'youtube',
       name: params[:name],
-      url: params[:url]
+      url: url,
     }
     head :ok
   end
@@ -28,5 +30,9 @@ private
     if @data
       ActionCable.server.broadcast 'messages', @data
     end
+  end
+
+  def extract_youtube_id(url)
+    URI(url).path[1..-1] rescue 'dQw4w9WgXcQ'
   end
 end
