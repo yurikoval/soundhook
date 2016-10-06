@@ -20,8 +20,9 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
       when 'sound'                    then @playSound(data)
       when 'youtube'                  then @playYoutube(data)
       when 'message'                  then @displayMessage(data)
+      when 'git_master_modified'      then @gitMasterModified(data)
       # when 'sale'                   then @displaySale(data)
-      # when 'git_master_modified'    then @gitMasterModified(data)
+
 
   stopEverything: ->
     @stopVideo()
@@ -54,8 +55,20 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     return
 
   displayMessage: (data) ->
-    src = $("#messages")
+    src = $("#content")
     src.html "<h2>#{data.msg}-#{data.username}</h2>"
+    @playSound(data)
+    return
+
+  gitMasterModified: (data) ->
+    src = $("#content")
+    rows = ""
+    index = 0
+    commits = data.commits
+    while (index < commits.length)
+      rows = rows + "<tr><td>#{commits[index]["message"]}</td><td>#{commits[index]["committer"]["name"]}</td></tr>"
+      ++index
+    src.html "<h2>#{data.repository}-#{data.sender_name}</h2><table>#{rows}</table>"
     @playSound(data)
     return
 
