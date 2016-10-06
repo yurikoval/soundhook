@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h3><%= @sound.name %></h3>
+</p>
+
+<p>
+  <audio controls="controls">
+  <source src="<%= "http://" + @sound.sound_file.to_s.match(/\/\/(.*)\?/).captures[0] %>" type="audio/mpeg">
+  </audio>
+</p>
+
+<%= link_to 'Edit', edit_sound_path(@sound) %> |
+<%= link_to 'Back', sounds_path %>
