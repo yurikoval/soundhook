@@ -56,13 +56,15 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
 
   displayMessage: (data) ->
     src = $("#content")
-    src.html "<div class='message-container'><div class='message'>#{data.msg}</div><div class='author'>- #{data.username} -</div></div>"
+    src.html "<div class='message-container'><div class='message-content'>#{data.msg}</div><div class='message-author'>- #{data.username} -</div></div>"
     @playSound(data)
     return
 
   displaySale: (data) ->
+    src = $("#content")
+    src.html "<div class='sale'><div class='sale-container'><div class='sale-content'>Dalla dalla billz, y'all! </div><div class='sale-icon'>💵💵💵💵</div><div class='sale-info'>#{data.amount} from #{data.country}</div><div class='sale-icon'>💵💵💵💵</div></div></div>"
     @playSound(data)
-    @displayMessage({msg: "Dollars Dollars !! #{data.amount} - #{data.country}", username: 'Zuora'})
+    return
 
   gitMasterModified: (data) ->
     src = $("#content")
