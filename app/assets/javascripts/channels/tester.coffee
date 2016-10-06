@@ -27,6 +27,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
   stopEverything: ->
     @stopVideo()
     @stopSound()
+    @emptyPage()
 
   playSound: (data) ->
     src = $("#player")
@@ -39,7 +40,13 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     src = $("#player")
     src.trigger('pause')
 
+  emptyPage: ->
+    console.log("empty page")
+    src = $("#content")
+    src.html ""
+
   playYoutube: (data) ->
+    @stopEverything()
     if @player?
       @player.loadVideoById(data.url, 0, "large")
     else
@@ -55,18 +62,21 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     return
 
   displayMessage: (data) ->
+    @stopEverything()
     src = $("#content")
     src.html "<div class='message-container'><div class='message-content'>#{data.msg}</div><div class='message-author'>- #{data.username} -</div></div>"
     @playSound(data)
     return
 
   displaySale: (data) ->
+    @stopEverything()
     src = $("#content")
     src.html "<div class='sale'><div class='sale-container'><div class='sale-content'>Dalla dalla billz, y'all! </div><div class='sale-icon'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'></div><div class='sale-info'>#{data.amount} from #{data.country}</div></div></div>"
     @playSound(data)
     return
 
   gitMasterModified: (data) ->
+    @stopEverything()
     src = $("#content")
     rows = ""
     index = 0
