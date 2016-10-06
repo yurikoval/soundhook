@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= f.label :hook_type %>
-    <%= f.collection_select :hook_type, %w(sound youtube), :to_s, :capitalize %>
+    <%= f.collection_select :hook_type, BaseFormatter::FORMATTERS, :to_s, :capitalize %>
   </div>
 
   <div class="actions">
