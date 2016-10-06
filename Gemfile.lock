@@ -39,12 +39,16 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.2)
+    autoprefixer-rails (6.5.0.2)
+      execjs
     aws-sdk (2.6.5)
       aws-sdk-resources (= 2.6.5)
     aws-sdk-core (2.6.5)
       jmespath (~> 1.0)
     aws-sdk-resources (2.6.5)
       aws-sdk-core (= 2.6.5)
+    bootstrap-sass (3.2.0.2)
+      sass (~> 3.2)
     builder (3.2.2)
     byebug (9.0.6)
     climate_control (0.0.3)
@@ -179,7 +183,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
   aws-sdk (~> 2.3)
+  bootstrap-sass (~> 3.2.0)
   byebug
   coffee-rails (~> 4.2)
   dotenv-rails

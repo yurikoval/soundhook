@@ -1,23 +1,25 @@
+<%= link_to 'Launch Billboard', board_path, target: :_blank, class: 'btn btn-default launch-button' %>
+<div class="logo-img"><%= image_tag("broadcast.png", :alt => "broadcast", :class => "logo") %></div>
+<h1>Broadcast</h1>
+
+
 <p id="notice"><%= notice %></p>
-
-<%= link_to 'Launch Billboard', board_path, target: :_blank, class: 'launch_billboard' %>
-<h1>Webhooks</h1>
-
-<table>
+<br><br>
+<table class="table table-condensed">
   <thead>
     <tr>
+      <th>Name</th>
       <th>Endpoint</th>
-      <th>Type</th>
       <th>Sound</th>
-      <th></th>
+      <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @sounds.each do |sound| %>
       <tr>
-        <td><%= link_to hook_url(provider: sound.name), hook_url(provider: sound.name) %></td>
         <td><%= sound.hook_type.capitalize %></td>
+        <td><%= link_to hook_url(provider: sound.name), hook_url(provider: sound.name) %></td>
         <td>
           <% if sound.sound_file.present? %>
             <audio controls="controls">
@@ -33,5 +35,27 @@
   </tbody>
 </table>
 
-<h3>Add New Webhook</h3>
-<%= render 'form', sound: @sound %>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal">
+  New Broadcast
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">New Broadcast</h4>
+      </div>
+      <div class="modal-body">
+        <%= render 'form', sound: @sound %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

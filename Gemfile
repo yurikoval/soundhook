@@ -11,6 +11,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'paperclip'
 gem 'aws-sdk', '~> 2.3'
 gem 'redis'
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri
