@@ -46,7 +46,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
 
   onPlayerStateChange: (event) ->
     if event.data == YT.PlayerState.PLAYING and !done
-      setTimeout @stopVideo.bind(this), 10000
+      setTimeout @stopVideo.bind(this), 30000
       done = true
     return
 
