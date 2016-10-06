@@ -19,9 +19,13 @@
         <td><%= link_to hook_url(provider: sound.name), hook_url(provider: sound.name) %></td>
         <td><%= sound.hook_type.capitalize %></td>
         <td>
-          <audio controls="controls">
-          <source src="<%= "http:" + sound.sound_file.url %>" type="audio/mpeg">
-          </audio>
+          <% if sound.sound_file.present? %>
+            <audio controls="controls">
+              <source src="<%= "http:" + sound.sound_file.url %>" type="audio/mpeg">
+            </audio>
+          <% else %>
+            No sound
+          <% end %>
         </td>
         <td><%= link_to 'Remove', sound, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
