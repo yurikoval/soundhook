@@ -55,7 +55,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
 
   displayMessage: (data) ->
     src = $("#messages")
-    src.html "<h2>#{data.msg}</h2>"
+    src.html "<h2>#{data.msg}-#{data.username}</h2>"
     @playSound(data)
     return
 
