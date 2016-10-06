@@ -1,12 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'Launch Billboard', board_path, target: :_blank, class: 'launch_billboard' %>
 <h1>Sounds</h1>
-
-<%= render 'form', sound: @sound %>
-
-<br>
-<hr>
-<br>
 
 <table>
   <thead>
@@ -34,9 +29,5 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Sound', new_sound_path %>
-<br />
-<br />
-<%= link_to 'Test Page', tester_index_path, target: :_blank %>
+<h3>Add New Webhook</h3>
+<%= render 'form', sound: @sound %>
