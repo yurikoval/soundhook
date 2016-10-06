@@ -63,9 +63,9 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
 
   displayMessage: (data) ->
     @stopEverything()
+    @playSound(data)
     src = $("#content")
     src.html "<div class='message-container'><div class='message-content'>#{data.msg}</div><div class='message-author'>- #{data.username} -</div></div>"
-    @playSound(data)
     return
 
   displaySale: (data) ->
@@ -77,6 +77,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
 
   gitMasterModified: (data) ->
     @stopEverything()
+    @playSound(data)
     src = $("#content")
     rows = ""
     index = 0
@@ -85,7 +86,6 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
       rows = rows + "<tr><td>#{commits[index]["message"]}</td><td>#{commits[index]["committer"]["name"]}</td></tr>"
       ++index
     src.html "<h2>#{data.repository}-#{data.sender_name}</h2><table>#{rows}</table>"
-    @playSound(data)
     return
 
   onPlayerReady: (event) ->
