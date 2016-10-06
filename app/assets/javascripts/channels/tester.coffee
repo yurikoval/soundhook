@@ -21,7 +21,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
       when 'youtube'                  then @playYoutube(data)
       when 'message'                  then @displayMessage(data)
       when 'git_master_modified'      then @gitMasterModified(data)
-      # when 'sale'                   then @displaySale(data)
+      when 'sale'                     then @displaySale(data)
 
 
   stopEverything: ->
@@ -59,6 +59,9 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     src.html "<h2>#{data.msg}-#{data.username}</h2>"
     @playSound(data)
     return
+
+  displaySale: (data) ->
+    console.info "Implement me"
 
   gitMasterModified: (data) ->
     src = $("#content")

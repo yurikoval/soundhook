@@ -7,7 +7,7 @@ class HookController < ApplicationController
     if webhook = Sound.find_by(name: params[:provider])
       formatter = "#{webhook.hook_type.camelize}Formatter"
         .safe_constantize
-        .new(webhook, params)
+        .new(webhook, request)
       @data = formatter.data
       render inline: formatter.response, format: formatter.format
     else
