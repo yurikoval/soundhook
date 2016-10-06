@@ -1,3 +1,50 @@
 // Place all the styles related to the tester controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  line-height: 1.2;
+  font-family: Sans-Serif;
+
+  .message-container {
+    text-align: center;
+    padding: 50px;
+    border: 10px solid #000;
+    color: #000;
+    max-width: 70%;
+    min-width: 50%;
+    animation: blink 1.5s linear 1;
+  }
+
+  .message {
+    font-size: 4.5rem;
+    font-weight: normal;
+  }
+
+  .author {
+    font-size: 2.5rem;
+    font-weight: normal;
+    padding-top: 20px;
+    font-family: Serif;
+    font-style: italic;
+  }
+}
+
+@keyframes blink {
+  0% { opacity: 0; }
+  20% { opacity: 100; }
+  40% { opacity: 0; }
+  60% { opacity: 100; }
+  80% { opacity: 0; }
+  100% { opacity: 100; }
+}
