@@ -1,0 +1,27 @@
+<%= form_for(sound, multipart: true) do |f| %>
+  <% if sound.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sound.errors.count, "error") %> prohibited this sound from being saved:</h2>
+
+      <ul>
+      <% sound.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sound_file %>
+    <%= f.file_field :sound_file %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
