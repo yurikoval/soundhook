@@ -23,7 +23,7 @@
         <td><%= link_to sound.name, hook_url(provider: sound.name) %></td>
         <td>
           <audio controls="controls">
-          <source src="<%= "http://" + sound.sound_file.to_s.match(/\/\/(.*)\?/).captures[0] %>" type="audio/mpeg">
+          <source src="<%= "http:" + sound.sound_file.url %>" type="audio/mpeg">
           </audio>
         </td>
         <td><%= link_to 'Show', sound %></td>
