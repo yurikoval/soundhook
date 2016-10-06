@@ -61,7 +61,8 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     return
 
   displaySale: (data) ->
-    console.info "Implement me"
+    @playSound(data)
+    @displayMessage({msg: "Dollars Dollars !! #{data.amount} - #{data.country}", username: 'Zuora'})
 
   gitMasterModified: (data) ->
     src = $("#content")
