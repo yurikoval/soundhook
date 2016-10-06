@@ -4,10 +4,10 @@ class HookController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    if sound = Sound.find_by(name: params[:provider])
-      formatter = "#{sound.hook_type.camelize}Formatter"
+    if webhook = Sound.find_by(name: params[:provider])
+      formatter = "#{webhook.hook_type.camelize}Formatter"
         .safe_constantize
-        .new(sound, params)
+        .new(webhook, params)
       @data = formatter.data
       render inline: formatter.response, format: formatter.format
     else

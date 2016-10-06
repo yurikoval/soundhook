@@ -19,7 +19,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     switch data.type
       when 'sound'                    then @playSound(data)
       when 'youtube'                  then @playYoutube(data)
-      # when 'message'                then @displayMessage(data)
+      when 'message'                  then @displayMessage(data)
       # when 'sale'                   then @displaySale(data)
       # when 'git_master_modified'    then @gitMasterModified(data)
 
@@ -33,6 +33,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     src.attr 'type', data.format
     src.trigger('load')
     src.trigger('play')
+
   stopSound: ->
     src = $("#player")
     src.trigger('pause')
@@ -50,6 +51,12 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
         events:
           'onReady': @onPlayerReady.bind(this)
           'onStateChange': @onPlayerStateChange.bind(this))
+    return
+
+  displayMessage: (data) ->
+    src = $("#messages")
+    src.html "<h2>#{data.msg}</h2>"
+    @playSound(data)
     return
 
   onPlayerReady: (event) ->
