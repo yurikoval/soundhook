@@ -6,7 +6,7 @@ class BaseFormatter
   end
 
   def response
-    "Soundhook received for #{@params[:provider]}."
+    "Sent #{@params[:provider]}. to Billboard"
   end
 
   def format
