@@ -62,7 +62,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
 
   displaySale: (data) ->
     src = $("#content")
-    src.html "<div class='sale'><div class='sale-container'><div class='sale-content'>Dalla dalla billz, y'all! </div><div class='sale-icon'>💵💵💵💵</div><div class='sale-info'>#{data.amount} from #{data.country}</div><div class='sale-icon'>💵💵💵💵</div></div></div>"
+    src.html "<div class='sale'><div class='sale-container'><div class='sale-content'>Dalla dalla billz, y'all! </div><div class='sale-icon'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'></div><div class='sale-info'>#{data.amount} from #{data.country}</div></div></div>"
     @playSound(data)
     return
 
