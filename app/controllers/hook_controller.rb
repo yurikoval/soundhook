@@ -15,10 +15,10 @@ class HookController < ApplicationController
   end
 
   def youtube
-    url = extract_youtube_id(params[:url])
+    url = extract_youtube_id(params[:text])
     @data = {
       type: 'youtube',
-      name: params[:name],
+      name: params[:user_name],
       url: url,
     }
     head :ok
