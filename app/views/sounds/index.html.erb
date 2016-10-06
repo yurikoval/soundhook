@@ -20,7 +20,7 @@
   <tbody>
     <% @sounds.each do |sound| %>
       <tr>
-        <td><%= sound.name %></td>
+        <td><%= link_to sound.name, hook_url(provider: sound.name) %></td>
         <td>
           <audio controls="controls">
           <source src="<%= "http://" + sound.sound_file.to_s.match(/\/\/(.*)\?/).captures[0] %>" type="audio/mpeg">
