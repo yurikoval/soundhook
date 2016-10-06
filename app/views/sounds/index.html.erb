@@ -1,29 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <%= link_to 'Launch Billboard', board_path, target: :_blank, class: 'launch_billboard' %>
-<h1>Sounds</h1>
+<h1>Webhooks</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Endpoint</th>
+      <th>Type</th>
       <th>Sound</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @sounds.each do |sound| %>
       <tr>
-        <td><%= link_to sound.name, hook_url(provider: sound.name) %></td>
+        <td><%= link_to hook_url(provider: sound.name), hook_url(provider: sound.name) %></td>
+        <td><%= sound.hook_type.capitalize %></td>
         <td>
           <audio controls="controls">
           <source src="<%= "http:" + sound.sound_file.url %>" type="audio/mpeg">
           </audio>
         </td>
-        <td><%= link_to 'Show', sound %></td>
-        <td><%= link_to 'Edit', edit_sound_path(sound) %></td>
-        <td><%= link_to 'Destroy', sound, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Remove', sound, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
