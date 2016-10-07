@@ -60,11 +60,16 @@ html, body {
     }
 
     &-content {
-      font-size: 2rem;
+      font-size: 4rem;
       font-weight: bold;
     }
 
     &-info {
+      font-size: 6rem;
+      color: #70cf32;
+    }
+
+    &-location {
       font-size: 3rem;
     }
   }
