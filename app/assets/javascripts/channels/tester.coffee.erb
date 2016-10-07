@@ -47,6 +47,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     @showCalendar()
 
   playYoutube: (data) ->
+    $('#youtube_player').show()
     @stopEverything()
     if @player?
       @player.loadVideoById(data.url, 0, "large")
@@ -102,5 +103,6 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     return true unless @player?
     @player.stopVideo()
     @player.destroy()
+    $('#youtube_player').hide()
     @player = undefined
     return
