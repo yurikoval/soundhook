@@ -13,7 +13,6 @@ firstScriptTag.parentNode.insertBefore tag, firstScriptTag
 App.cable = ActionCable.createConsumer()
 
 App.messages = App.cable.subscriptions.create 'MessagesChannel',
-  done: true
   received: (data) ->
     @stopEverything()
     switch data.type
@@ -22,6 +21,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
       when 'message'                  then @displayMessage(data)
       when 'git_master_modified'      then @gitMasterModified(data)
       when 'sale'                     then @displaySale(data)
+    setTimeout @stopEverything.bind(this), 5000
 
 
   stopEverything: ->
@@ -44,6 +44,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     console.log("empty page")
     src = $("#content")
     src.html ""
+    @showCalendar()
 
   playYoutube: (data) ->
     @stopEverything()
@@ -57,12 +58,16 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
           showinfo: 0
           rel: 0
         events:
-          'onReady': @onPlayerReady.bind(this)
-          'onStateChange': @onPlayerStateChange.bind(this))
+          'onReady': @onPlayerReady.bind(this))
+    @hideCalendar()
     return
+
+  hideCalendar: -> $('#calendar').hide()
+  showCalendar: -> $('#calendar').show()
 
   displayMessage: (data) ->
     @stopEverything()
+    @hideCalendar()
     @playSound(data)
     src = $("#content")
     src.html "<div class='message-container'><div class='message-content'>#{data.msg}</div><div class='message-author'>- #{data.username} -</div></div>"
@@ -70,6 +75,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
 
   displaySale: (data) ->
     @stopEverything()
+    @hideCalendar()
     src = $("#content")
     src.html "<div class='sale'><div class='sale-container'><div class='sale-content'>Dalla dalla billz, y'all! </div><div class='sale-icon'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'></div><div class='sale-info'>#{data.amount} from #{data.country}</div></div></div>"
     @playSound(data)
@@ -90,13 +96,6 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
 
   onPlayerReady: (event) ->
     event.target.playVideo()
-    @done = false
-    return
-
-  onPlayerStateChange: (event) ->
-    if event.data == YT.PlayerState.PLAYING and !@done
-      setTimeout @stopVideo.bind(this), 30000
-      @done = true
     return
 
   stopVideo: ->
