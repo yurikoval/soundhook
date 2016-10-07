@@ -77,7 +77,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     @stopEverything()
     @hideCalendar()
     src = $("#content")
-    src.html "<div class='sale'><div class='sale-container'><div class='sale-content'>Dalla dalla billz, y'all! </div><div class='sale-icon'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'></div><br><br><div class='sale-info'>#{data.amount}</div><div class='sale-location'>New sign-up from #{data.city}, #{data.country}</div></div></div>"
+    src.html "<div class='sale'><div class='sale-container'><div class='sale-content'>Dalla dalla billz, y'all! </div><div class='sale-icon'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'></div><br><div class='sale-info'>#{data.amount}</div><div class='sale-location'>New sign-up from #{data.city}, #{data.country}</div></div></div>"
     @playSound(data)
     return
 
@@ -89,9 +89,9 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     index = 0
     commits = data.commits
     while (index < commits.length)
-      rows = rows + "<tr class='commit-container'><td class='commit-message'>&quot;#{commits[index]["message"]}&quot;</td><td class='username'>#{commits[index]["committer"]["name"]}</td></tr>"
+      rows = rows + "<tr class='commit-container'><td class='commit-message'>#{commits[index]["message"]}</td><td class='username'><span class='glyphicon glyphicon-user' aria-hidden='true'></span>&nbsp#{commits[index]["committer"]["name"]}</td></tr>"
       ++index
-    src.html "<div class='github'><div class='repository-name'><h2>Deployment to #{data.repository}</h2><div class='user-main'><img src='#{data.sender_img}'><span class='user-main-name'>#{data.sender_name}</span></div></div><div class='commits'><table><thead><tr><td></td></tr></thead>#{rows}</table></div></div>"
+    src.html "<div class='github'><div class='repository-name'><img class='lgtm' src='<%= image_path('lgtm.gif') %>'><h1>New push to <code>#{data.repository}</code></h1><br><div class='user-main'><img src='#{data.sender_img}'><span class='user-main-name'>#{data.sender_name}</span></div></div><div class='commits'><table><thead><tr><td></td></tr></thead>#{rows}</table></div></div>"
     return
 
   onPlayerReady: (event) ->

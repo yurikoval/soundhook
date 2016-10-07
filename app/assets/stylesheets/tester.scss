@@ -14,7 +14,7 @@ html, body {
   align-items: center;
   height: 100%;
   line-height: 1.2;
-  font-family: "Avenir";
+  font-family: "Helvetica" "Arial";
 
   .message {
     &-container {
@@ -57,20 +57,21 @@ html, body {
       text-align: center;
       padding: 30px 50px;
       background-color: #FFF;
+      border-radius: 6px;
     }
 
     &-content {
-      font-size: 4rem;
+      font-size: 2rem;
       font-weight: bold;
     }
 
     &-info {
-      font-size: 6rem;
+      font-size: 4rem;
       color: #70cf32;
     }
 
     &-location {
-      font-size: 3rem;
+      font-size: 2rem;
     }
   }
 
@@ -80,8 +81,13 @@ html, body {
       text-align: center;
       margin-bottom: 25px;
     }
-    h2 {
-      margin-bottom: 15px;
+    .lgtm {
+      display: block;
+      margin: 40px auto;
+      width: 400px;
+    }
+    h1 {
+      width: 100%;
     }
     .user-main {
       width: 100%;
@@ -90,22 +96,28 @@ html, body {
         max-width: 40px;
         max-height: 40px;
         margin-right: 8px;
+        border-radius: 20px;
       }
       .user-main-name {
         display: inline;
-        font-size: 16px;
+        font-size: 20px;
+        font-weight: 500;
       }
     }
     .commits table {
-      width: 600px;
+      width: 500px;
       font-size: 16px;
 
       td.commit-message,
       td.username {
         padding: 10px 0;
+        font-weight: 200;
+        text-align: right;
       }
       td.commit-message {
-        width: 300px;
+        width: 200px;
+        font-weight: 500;
+        text-align: left;
       }
       td.username {
         width: 200px;
