@@ -73,18 +73,27 @@ html, body {
     .repository-name {
       width: 100%;
       text-align: center;
+      margin-bottom: 25px;
+    }
+    h2 {
+      margin-bottom: 15px;
+    }
+    .user-main {
+      width: 100%;
       img {
         display: inline;
         max-width: 40px;
         max-height: 40px;
         margin-right: 8px;
       }
-      h2 {
+      .user-main-name {
         display: inline;
+        font-size: 16px;
       }
     }
     .commits table {
       width: 600px;
+      font-size: 16px;
 
       td.commit-message,
       td.username {
