@@ -21,7 +21,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
       when 'message'                  then @displayMessage(data)
       when 'git_master_modified'      then @gitMasterModified(data)
       when 'sale'                     then @displaySale(data)
-    setTimeout @stopEverything.bind(this), 5000
+    setTimeout @stopEverything.bind(this), 20000
 
 
   stopEverything: ->
