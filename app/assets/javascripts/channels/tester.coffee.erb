@@ -84,6 +84,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
 
   gitMasterModified: (data) ->
     @stopEverything()
+    @hideCalendar()
     @playSound(data)
     src = $("#content")
     rows = ""
