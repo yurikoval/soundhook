@@ -83,9 +83,9 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     index = 0
     commits = data.commits
     while (index < commits.length)
-      rows = rows + "<tr><td>#{commits[index]["message"]}</td><td>#{commits[index]["committer"]["name"]}</td></tr>"
+      rows = rows + "<tr class='commit-container'><td class='commit-message'>#{commits[index]["message"]}</td><td class='username'>#{commits[index]["committer"]["name"]}</td></tr>"
       ++index
-    src.html "<h2>#{data.repository}-#{data.sender_name}</h2><table>#{rows}</table>"
+    src.html "<div class='github'><div class='repository-name'><img src='#{data.sender_img}'><h2>#{data.repository}-#{data.sender_name}</h2></div><div class='commits'><table>#{rows}</table></div></div>"
     return
 
   onPlayerReady: (event) ->

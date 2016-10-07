@@ -14,10 +14,9 @@ html, body {
   align-items: center;
   height: 100%;
   line-height: 1.2;
-  font-family: Sans-Serif;
+  font-family: "Avenir";
 
   .message {
-
     &-container {
       text-align: center;
       padding: 50px;
@@ -38,7 +37,6 @@ html, body {
       font-family: Serif;
       font-style: italic;
     }
-
   }
 
   .sale {
@@ -69,7 +67,36 @@ html, body {
     &-info {
       font-size: 3rem;
     }
+  }
 
+  .github {
+    .repository-name {
+      width: 100%;
+      text-align: center;
+      img {
+        display: inline;
+        max-width: 40px;
+        max-height: 40px;
+        margin-right: 8px;
+      }
+      h2 {
+        display: inline;
+      }
+    }
+    .commits table {
+      width: 600px;
+
+      td.commit-message,
+      td.username {
+        padding: 10px 0;
+      }
+      td.commit-message {
+        width: 300px;
+      }
+      td.username {
+        width: 200px;
+      }
+    }
   }
 }
 
