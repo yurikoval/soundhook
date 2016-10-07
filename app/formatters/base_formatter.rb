@@ -7,7 +7,7 @@ class BaseFormatter
   end
 
   def response
-    "Sent #{@params[:provider]}. to Billboard"
+    "Sent #{@params[:provider]} to Billboard"
   end
 
   def format

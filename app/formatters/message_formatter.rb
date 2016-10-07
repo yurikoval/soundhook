@@ -8,4 +8,8 @@ class MessageFormatter < BaseFormatter
       format: @webhook.sound_file_content_type
     }
   end
+
+  def response
+    "Sent #{@params[:provider]} to Billboard: #{@params[:text]}"
+  end
 end
