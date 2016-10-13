@@ -2,10 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
-  zoom: 2;
-}
-
 .logo {
   width: 70px;
   display: block;
@@ -49,12 +45,4 @@ table {
   margin: 10px auto;
   text-align: center;
   font-size: 30px;
-}
-
-.instructions {
-  font-family: "Courier";
-  display: block;
-  margin: 20px auto;
-  text-align: center;
-  font-size: 12px;
 }

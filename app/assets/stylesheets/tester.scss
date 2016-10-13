@@ -6,138 +6,151 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  &.screen {
+    zoom: 1.6;
+  }
 }
 
-#content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  line-height: 1.2;
-  font-family: "Helvetica" "Arial";
-
-  .message {
-    &-container {
-      text-align: center;
-      padding: 50px;
-      border: 10px solid #000;
-      color: #000;
-      max-width: 70%;
-      min-width: 50%;
-      animation: blink 1.5s linear 1;
-    }
-
-    &-content {
-      font-size: 4rem;
-    }
-
-    &-author {
-      font-size: 2.5rem;
-      padding-top: 20px;
-      font-family: Serif;
-      font-style: italic;
-    }
-  }
-
-  .sale {
+.screen {
+  #content {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    line-height: 1.2;
+    font-family: "Helvetica" "Arial";
+
+    .message {
+      &-container {
+        text-align: center;
+        padding: 50px;
+        border: 10px solid #000;
+        color: #000;
+        max-width: 70%;
+        min-width: 50%;
+        animation: blink 1.5s linear 1;
+      }
+
+      &-content {
+        font-size: 4rem;
+      }
+
+      &-author {
+        font-size: 2.5rem;
+        padding-top: 20px;
+        font-family: Serif;
+        font-style: italic;
+      }
+    }
+
+    .sale {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      background-image: image-url('money.jpeg');
+      background-size: cover;
+
+      &-icon {
+        animation: blink 1.25s linear 1;
+        font-size: 5rem;
+      }
+
+      &-container {
+        text-align: center;
+        padding: 30px 50px;
+        background-color: #FFF;
+        border-radius: 6px;
+      }
+
+      &-content {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      &-info {
+        font-size: 4rem;
+        color: #70cf32;
+      }
+
+      &-location {
+        font-size: 2rem;
+      }
+    }
+
+    .github {
+      .repository-name {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 25px;
+      }
+      .lgtm {
+        display: block;
+        margin: 40px auto;
+        width: 400px;
+      }
+      h1 {
+        width: 100%;
+      }
+      .user-main {
+        width: 100%;
+        img {
+          display: inline;
+          max-width: 40px;
+          max-height: 40px;
+          margin-right: 8px;
+          border-radius: 20px;
+        }
+        .user-main-name {
+          display: inline;
+          font-size: 20px;
+          font-weight: 500;
+        }
+      }
+      .commits table {
+        width: 500px;
+        font-size: 16px;
+
+        td.commit-message,
+        td.username {
+          padding: 10px 0;
+          font-weight: 200;
+          text-align: right;
+        }
+        td.commit-message {
+          width: 200px;
+          font-weight: 500;
+          text-align: left;
+        }
+        td.username {
+          width: 200px;
+        }
+      }
+    }
+  }
+
+  @keyframes blink {
+    0% { opacity: 0; }
+    20% { opacity: 100; }
+    40% { opacity: 0; }
+    60% { opacity: 100; }
+    80% { opacity: 0; }
+    100% { opacity: 100; }
+  }
+
+
+  #youtube_player {
     width: 100%;
     height: 100%;
-    background-image: image-url('money.jpeg');
-    background-size: cover;
-
-    &-icon {
-      animation: blink 1.25s linear 1;
-      font-size: 5rem;
-    }
-
-    &-container {
-      text-align: center;
-      padding: 30px 50px;
-      background-color: #FFF;
-      border-radius: 6px;
-    }
-
-    &-content {
-      font-size: 2rem;
-      font-weight: bold;
-    }
-
-    &-info {
-      font-size: 4rem;
-      color: #70cf32;
-    }
-
-    &-location {
-      font-size: 2rem;
-    }
+    display: none;
   }
 
-  .github {
-    .repository-name {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 25px;
-    }
-    .lgtm {
-      display: block;
-      margin: 40px auto;
-      width: 400px;
-    }
-    h1 {
-      width: 100%;
-    }
-    .user-main {
-      width: 100%;
-      img {
-        display: inline;
-        max-width: 40px;
-        max-height: 40px;
-        margin-right: 8px;
-        border-radius: 20px;
-      }
-      .user-main-name {
-        display: inline;
-        font-size: 20px;
-        font-weight: 500;
-      }
-    }
-    .commits table {
-      width: 500px;
-      font-size: 16px;
-
-      td.commit-message,
-      td.username {
-        padding: 10px 0;
-        font-weight: 200;
-        text-align: right;
-      }
-      td.commit-message {
-        width: 200px;
-        font-weight: 500;
-        text-align: left;
-      }
-      td.username {
-        width: 200px;
-      }
-    }
+  .instructions {
+    font-family: "Courier";
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    font-size: 12px;
   }
-}
-
-@keyframes blink {
-  0% { opacity: 0; }
-  20% { opacity: 100; }
-  40% { opacity: 0; }
-  60% { opacity: 100; }
-  80% { opacity: 0; }
-  100% { opacity: 100; }
-}
-
-
-#youtube_player {
-  width: 100%;
-  height: 100%;
-  display: none;
 }
