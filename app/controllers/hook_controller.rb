@@ -1,6 +1,6 @@
 require 'uri'
 class HookController < ApplicationController
-  after_action :send_sound
+  after_action :send_sound, only: :create
   skip_before_action :verify_authenticity_token
 
   def create
@@ -13,6 +13,11 @@ class HookController < ApplicationController
     else
       head :not_found
     end
+  end
+
+  def refresh
+    ActionCable.server.broadcast 'messages', {type: 'refresh'}
+    head :ok
   end
 
 private

@@ -21,6 +21,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
       when 'message'                  then @displayMessage(data)
       when 'git_master_modified'      then @gitMasterModified(data)
       when 'sale'                     then @displaySale(data)
+      when 'refresh'                  then window.location.reload()
     setTimeout @stopEverything.bind(this), 40000
 
 

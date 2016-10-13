@@ -1,5 +1,8 @@
 <div class="container">
-<%= link_to 'Launch Billboard', board_path, target: :_blank, class: 'btn btn-default launch-button' %>
+  <div class="btn-group billboard-actions">
+    <%= link_to 'Reload Billboards', refresh_path, remote: true, class: 'btn btn-default' %>
+    <%= link_to 'Launch Billboard', board_path, target: :_blank, class: 'btn btn-default' %>
+  </div>
 <div class="logo-img"><%= image_tag("broadcast.png", :alt => "broadcast", :class => "logo") %></div>
 <h1>Broadcast</h1>
 
