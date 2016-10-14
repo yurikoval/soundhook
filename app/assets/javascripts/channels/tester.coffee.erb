@@ -18,100 +18,100 @@ $ ->
     $('#screen').attr('src', window.locations[++i % window.locations.length]);
   , 300000
 
-App.cable = ActionCable.createConsumer()
+  App.cable = ActionCable.createConsumer()
 
-App.messages = App.cable.subscriptions.create 'MessagesChannel',
-  received: (data) ->
-    @stopEverything()
-    switch data.type
-      when 'sound'                    then @playSound(data)
-      when 'youtube'                  then @playYoutube(data)
-      when 'message'                  then @displayMessage(data)
-      when 'git_master_modified'      then @gitMasterModified(data)
-      when 'sale'                     then @displaySale(data)
-      when 'refresh'                  then window.location.reload()
-    setTimeout @stopEverything.bind(this), 40000
+  App.messages = App.cable.subscriptions.create 'MessagesChannel',
+    received: (data) ->
+      @stopEverything()
+      switch data.type
+        when 'sound'                    then @playSound(data)
+        when 'youtube'                  then @playYoutube(data)
+        when 'message'                  then @displayMessage(data)
+        when 'git_master_modified'      then @gitMasterModified(data)
+        when 'sale'                     then @displaySale(data)
+        when 'refresh'                  then window.location.reload()
+      setTimeout @stopEverything.bind(this), 40000
 
-  stopEverything: ->
-    @stopVideo()
-    @stopSound()
-    @emptyPage()
+    stopEverything: ->
+      @stopVideo()
+      @stopSound()
+      @emptyPage()
 
-  playSound: (data) ->
-    src = $("#player")
-    src.attr 'src', data.sound_url
-    src.attr 'type', data.format
-    src.trigger('load')
-    src.trigger('play')
+    playSound: (data) ->
+      src = $("#player")
+      src.attr 'src', data.sound_url
+      src.attr 'type', data.format
+      src.trigger('load')
+      src.trigger('play')
 
-  stopSound: ->
-    src = $("#player")
-    src.trigger('pause')
+    stopSound: ->
+      src = $("#player")
+      src.trigger('pause')
 
-  emptyPage: ->
-    console.log("empty page")
-    src = $("#content")
-    src.html ""
-    @showScreen()
+    emptyPage: ->
+      console.log("empty page")
+      src = $("#content")
+      src.html ""
+      @showScreen()
 
-  playYoutube: (data) ->
-    $('#youtube_player').show()
-    @stopEverything()
-    if @player?
-      @player.loadVideoById(data.url, 0, "large")
-    else
-      @player = new (YT.Player)('youtube_player',
-        videoId: data.url
-        playerVars:
-          controls: 0
-          showinfo: 0
-          rel: 0
-        events:
-          'onReady': @onPlayerReady.bind(this))
-    @hideScreen()
-    return
+    playYoutube: (data) ->
+      $('#youtube_player').show()
+      @stopEverything()
+      if @player?
+        @player.loadVideoById(data.url, 0, "large")
+      else
+        @player = new (YT.Player)('youtube_player',
+          videoId: data.url
+          playerVars:
+            controls: 0
+            showinfo: 0
+            rel: 0
+          events:
+            'onReady': @onPlayerReady.bind(this))
+      @hideScreen()
+      return
 
-  hideScreen: -> $('#screen').hide()
-  showScreen: -> $('#screen').show()
+    hideScreen: -> $('#screen').hide()
+    showScreen: -> $('#screen').show()
 
-  displayMessage: (data) ->
-    @stopEverything()
-    @hideScreen()
-    @playSound(data)
-    src = $("#content")
-    src.html "<div class='message-container'><div class='message-content'>#{data.msg}</div><div class='message-author'>- #{data.username} -</div></div>"
-    return
+    displayMessage: (data) ->
+      @stopEverything()
+      @hideScreen()
+      @playSound(data)
+      src = $("#content")
+      src.html "<div class='message-container'><div class='message-content'>#{data.msg}</div><div class='message-author'>- #{data.username} -</div></div>"
+      return
 
-  displaySale: (data) ->
-    @stopEverything()
-    @hideScreen()
-    src = $("#content")
-    src.html "<div class='sale'><div class='sale-container'><div class='sale-content'>Dalla dalla billz, y'all! </div><div class='sale-icon'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'></div><br><div class='sale-info'>#{data.amount}</div><div class='sale-location'>New sign-up from #{data.city}, #{data.country}</div></div></div>"
-    @playSound(data)
-    return
+    displaySale: (data) ->
+      @stopEverything()
+      @hideScreen()
+      src = $("#content")
+      src.html "<div class='sale'><div class='sale-container'><div class='sale-content'>Dalla dalla billz, y'all! </div><div class='sale-icon'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'></div><br><div class='sale-info'>#{data.amount}</div><div class='sale-location'>New sign-up from #{data.city}, #{data.country}</div></div></div>"
+      @playSound(data)
+      return
 
-  gitMasterModified: (data) ->
-    @stopEverything()
-    @hideScreen()
-    @playSound(data)
-    src = $("#content")
-    rows = ""
-    index = 0
-    commits = data.commits
-    while (index < commits.length)
-      rows = rows + "<tr class='commit-container'><td class='commit-message'>#{commits[index]["message"]}</td><td class='username'><span class='glyphicon glyphicon-user' aria-hidden='true'></span>&nbsp#{commits[index]["committer"]["name"]}</td></tr>"
-      ++index
-    src.html "<div class='github'><div class='repository-name'><img class='lgtm' src='<%= image_path('lgtm.gif') %>'><h1>New push to <code>#{data.repository}</code></h1><br><div class='user-main'><img src='#{data.sender_img}'><span class='user-main-name'>#{data.sender_name}</span></div></div><div class='commits'><table><thead><tr><td></td></tr></thead>#{rows}</table></div></div>"
-    return
+    gitMasterModified: (data) ->
+      @stopEverything()
+      @hideScreen()
+      @playSound(data)
+      src = $("#content")
+      rows = ""
+      index = 0
+      commits = data.commits
+      while (index < commits.length)
+        rows = rows + "<tr class='commit-container'><td class='commit-message'>#{commits[index]["message"]}</td><td class='username'><span class='glyphicon glyphicon-user' aria-hidden='true'></span>&nbsp#{commits[index]["committer"]["name"]}</td></tr>"
+        ++index
+      src.html "<div class='github'><div class='repository-name'><img class='lgtm' src='<%= image_path('lgtm.gif') %>'><h1>New push to <code>#{data.repository}</code></h1><br><div class='user-main'><img src='#{data.sender_img}'><span class='user-main-name'>#{data.sender_name}</span></div></div><div class='commits'><table><thead><tr><td></td></tr></thead>#{rows}</table></div></div>"
+      return
 
-  onPlayerReady: (event) ->
-    event.target.playVideo()
-    return
+    onPlayerReady: (event) ->
+      event.target.playVideo()
+      return
 
-  stopVideo: ->
-    return true unless @player?
-    @player.stopVideo()
-    @player.destroy()
-    $('#youtube_player').hide()
-    @player = undefined
-    return
+    stopVideo: ->
+      return true unless @player?
+      @player.stopVideo()
+      @player.destroy()
+      $('#youtube_player').hide()
+      @player = undefined
+      return
