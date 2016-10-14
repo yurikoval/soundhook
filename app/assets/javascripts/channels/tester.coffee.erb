@@ -10,6 +10,14 @@ tag.src = 'https://www.youtube.com/iframe_api'
 firstScriptTag = document.getElementsByTagName('script')[0]
 firstScriptTag.parentNode.insertBefore tag, firstScriptTag
 
+$ ->
+  window.locations = $('#screen').data('locations')
+
+  i = 0
+  setInterval ->
+    $('#screen').attr('src', window.locations[++i % window.locations.length]);
+  , 300000
+
 App.cable = ActionCable.createConsumer()
 
 App.messages = App.cable.subscriptions.create 'MessagesChannel',
@@ -23,7 +31,6 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
       when 'sale'                     then @displaySale(data)
       when 'refresh'                  then window.location.reload()
     setTimeout @stopEverything.bind(this), 40000
-
 
   stopEverything: ->
     @stopVideo()
@@ -45,7 +52,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
     console.log("empty page")
     src = $("#content")
     src.html ""
-    @showCalendar()
+    @showScreen()
 
   playYoutube: (data) ->
     $('#youtube_player').show()
@@ -61,15 +68,15 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
           rel: 0
         events:
           'onReady': @onPlayerReady.bind(this))
-    @hideCalendar()
+    @hideScreen()
     return
 
-  hideCalendar: -> $('#calendar').hide()
-  showCalendar: -> $('#calendar').show()
+  hideScreen: -> $('#screen').hide()
+  showScreen: -> $('#screen').show()
 
   displayMessage: (data) ->
     @stopEverything()
-    @hideCalendar()
+    @hideScreen()
     @playSound(data)
     src = $("#content")
     src.html "<div class='message-container'><div class='message-content'>#{data.msg}</div><div class='message-author'>- #{data.username} -</div></div>"
@@ -77,7 +84,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
 
   displaySale: (data) ->
     @stopEverything()
-    @hideCalendar()
+    @hideScreen()
     src = $("#content")
     src.html "<div class='sale'><div class='sale-container'><div class='sale-content'>Dalla dalla billz, y'all! </div><div class='sale-icon'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'><img width='70' src='http://pix.iemoji.com/images/emoji/apple/ios-9/256/banknote-with-dollar-sign.png'></div><br><div class='sale-info'>#{data.amount}</div><div class='sale-location'>New sign-up from #{data.city}, #{data.country}</div></div></div>"
     @playSound(data)
@@ -85,7 +92,7 @@ App.messages = App.cable.subscriptions.create 'MessagesChannel',
 
   gitMasterModified: (data) ->
     @stopEverything()
-    @hideCalendar()
+    @hideScreen()
     @playSound(data)
     src = $("#content")
     rows = ""

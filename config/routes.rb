@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   get '/hook/refresh', to: 'hook#refresh', as: :refresh
   match '/hook/:provider', to: 'hook#create', as: :hook, via: %i(get post)
   get 'board' => 'tester#index'
-  get 'tester/index', to: redirect('/board')
+  get 'default' => 'tester#default'
   root to: 'tester#index'
 end
