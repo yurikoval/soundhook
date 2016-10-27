@@ -1,5 +1,5 @@
 class BaseFormatter
-  FORMATTERS = %w(sound youtube zuora message github).freeze
+  FORMATTERS = %w(sound youtube zuora message github heroku).freeze
   def initialize(webhook, request = {})
     @webhook = webhook
     @request = request

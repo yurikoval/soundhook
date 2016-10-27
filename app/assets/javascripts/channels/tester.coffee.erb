@@ -28,6 +28,7 @@ $ ->
         when 'youtube'                  then @playYoutube(data)
         when 'message'                  then @displayMessage(data)
         when 'git_master_modified'      then @gitMasterModified(data)
+        when 'heroku'                   then @heroku(data)
         when 'sale'                     then @displaySale(data)
         when 'refresh'                  then window.location.reload()
       setTimeout @stopEverything.bind(this), 40000
@@ -102,6 +103,20 @@ $ ->
         rows = rows + "<tr class='commit-container'><td class='commit-message'>#{commits[index]["message"]}</td><td class='username'><span class='glyphicon glyphicon-user' aria-hidden='true'></span>&nbsp#{commits[index]["committer"]["name"]}</td></tr>"
         ++index
       src.html "<div class='github'><div class='repository-name'><img class='lgtm' src='<%= image_path('lgtm.gif') %>'><h1>New push to <code>#{data.repository}</code></h1><br><div class='user-main'><img src='#{data.sender_img}'><span class='user-main-name'>#{data.sender_name}</span></div></div><div class='commits'><table><thead><tr><td></td></tr></thead>#{rows}</table></div></div>"
+      return
+
+    heroku: (data) ->
+      @stopEverything()
+      @hideScreen()
+      @playSound(data)
+      src = $("#content")
+      rows = ""
+      index = 0
+      commits = data.commits
+      while (index < commits.length)
+        rows = rows + "<tr class='commit-container'><td class='commit-message'>#{commits[index]}</td><td class='username'></td></tr>"
+        ++index
+      src.html "<div class='github'><div class='repository-name'><img class='lgtm' src='<%= image_path('lgtm.gif') %>'><h1>Deployed to <code>#{data.repository}</code></h1><br><div class='user-main'><img src='#{data.sender_img}'><span class='user-main-name'>#{data.sender_name}</span></div></div><div class='commits'><table><thead><tr><td></td></tr></thead>#{rows}</table></div></div>"
       return
 
     onPlayerReady: (event) ->
