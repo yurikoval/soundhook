@@ -1,9 +1,14 @@
 require 'digest/md5'
+require 'giphy'
 class HerokuFormatter < BaseFormatter
+  DEPLOY_KEYWORDS = %w(success rocket rocket-launch).freeze
   def data
     hash = Digest::MD5.hexdigest(@params[:user].downcase)
+    image = Giphy.random(DEPLOY_KEYWORDS.sample)
+    image_url = image.image_original_url.to_s
     {
       type: 'heroku',
+      image_url: image_url,
       repository: @params[:app],
       sender_name: @params[:user],
       sender_img: "https://www.gravatar.com/avatar/#{hash}",

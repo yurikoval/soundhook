@@ -13,6 +13,7 @@ gem 'aws-sdk', '~> 2.3'
 gem 'redis'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
+gem 'giphy'
 
 group :development, :test do
   gem 'byebug', platform: :mri
